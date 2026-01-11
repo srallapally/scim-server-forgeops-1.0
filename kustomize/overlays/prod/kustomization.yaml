@@ -1,0 +1,42 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: prod
+
+resources:
+  - ../../../base/scim-server
+
+configMapGenerator:
+  - name: scim-server-config
+    behavior: replace
+    literals:
+      - pingidm-base-url=http://idm.prod.svc.cluster.local:80/openidm
+      - oauth-token-url=http://am.prod.svc.cluster.local:80/am/oauth2/realms/root/access_token
+      - scim-server-base-url=https://scim.example.com
+      - oauth-scope=
+      - managed-user-object=alpha_user
+      - managed-role-object=alpha_role
+
+secretGenerator:
+  - name: scim-server-secrets
+    behavior: replace
+    literals:
+      - oauth-client-id=CUSTOMER_WILL_REPLACE_THIS
+      - oauth-client-secret=CUSTOMER_WILL_REPLACE_THIS
+
+patchesStrategicMerge:
+  - deployment-patch.yaml
+
+patchesJson6902:
+  - target:
+      group: networking.k8s.io
+      version: v1
+      kind: Ingress
+      name: scim-server
+    patch: |-
+      - op: replace
+        path: /spec/rules/0/host
+        value: scim.example.com
+      - op: replace
+        path: /spec/tls/0/hosts/0
+        value: scim.example.com
