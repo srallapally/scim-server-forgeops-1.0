@@ -1,4 +1,4 @@
-# SCIM 2.0 Server for PingIDM - ForgeOps Deployment Package
+# SCIM 2.0 Server for PingOne Advanced Identity Cloud - ForgeOps Deployment Package
 
 ## Package Contents
 
@@ -43,9 +43,9 @@ cp -r kustomize/overlays/prod/scim-server /path/to/forgeops/kustomize/overlay/pr
 
 ### Step 3: Configure OAuth Client
 
-**You MUST create an OAuth client in Access Manager before deploying.**
+**You MUST create an OAuth App with Client Credentials grant in your Alpha realm tenant before deploying.**
 
-See `docs/OAUTH_SETUP.md` for detailed instructions.
+@TODO See `docs/OAUTH_SETUP.md` for detailed instructions.
 
 ### Step 4: Update Secrets
 
