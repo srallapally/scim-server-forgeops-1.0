@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: scim-server-config
+data:
+  pingidm-base-url: "http://idm:80/openidm"
+  oauth-token-url: "http://am:80/am/oauth2/realms/root/access_token"
+  scim-server-base-url: "https://scim.example.com"
+  oauth-scope: ""
+  managed-user-object: "alpha_user"
+  managed-role-object: "alpha_role"
